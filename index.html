@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Adarsh Jaiswal — Khatarnak Animated Portfolio</title>
+  <meta name="description" content="Adarsh Jaiswal — Student Web Developer. Animated, responsive, performant and accessible anime-inspired portfolio." />
+  <meta name="theme-color" content="#001e1a" />
+  <link rel="icon" href="assets/favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Adarsh Jaiswal — Web Developer" />
+  <meta property="og:description" content="Animated anime-inspired portfolio with advanced UI/UX and animations." />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="css/style.css" as="style" />
+  <link rel="preload" href="js/script.js" as="script" />
+
+  <!-- Manifest for PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- GSAP for advanced, smooth animations (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer integrity="sha512-+bK0Ue4J+hQe0uUH6i/5s5YQ0cHRuS5gKQH3nXlQ8hVQx5QY0oX1fA2fZrE6oN+uS7yD5b2m8mK9My0p2kqzZg==" crossorigin="anonymous"></script>
+  <!-- Lottie for vector animations (optional, include Lottie JSON in assets/ as needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js" defer integrity="sha512-Xh7k0r6bD3+zJcL2fE8WQJx3h8vA9V0+2gB7VY8P6G2Zf9nX2p2sF2Qk1k6sK3p0X8J5xZ1b1R1l0z3mQ==" crossorigin="anonymous"></script>
+
+  <!-- Lightweight theme color for social -->
+  <meta name="msapplication-TileColor" content="#001e1a" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Preloader: visible while assets/JS initialize -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-inner" role="status" aria-live="polite">
+      <svg class="spinner" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="20"></circle></svg>
+      <span class="preloader-text">Loading — ADARSH</span>
+    </div>
+  </div>
+
+  <!-- Background layers: canvas particles + subtle gradient layers -->
+  <div id="bgLayers" aria-hidden="true">
+    <canvas id="bgCanvas"></canvas>
+    <svg id="bgWave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 C300,100 900,0 1200,80 L1200,120 L0,120 Z" fill="rgba(0,255,204,0.03)"></path>
+    </svg>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="site-header" role="banner">
+    <nav class="site-nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Home — Adarsh Jaiswal">ADARSH <strong>JAISWAL</strong></a>
+
+      <div class="nav-controls">
+        <button id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">☰</button>
+        <ul id="navMenu" class="nav-list" role="menubar">
+          <li role="none"><a role="menuitem" href="#home">Home</a></li>
+          <li role="none"><a role="menuitem" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" href="#skills">Skills</a></li>
+          <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+          <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggle" aria-pressed="false" aria-label="Toggle theme">🌗</button>
+        <a class="btn resume" href="assets/Adarsh_Jaiswal_Resume.pdf" download>Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main id="main">
+    <!-- HERO -->
+    <section id="home" class="hero container" aria-label="Home section">
+      <div class="hero-grid">
+        <figure class="hero-figure" aria-hidden="false">
+          <!-- responsive avatar: replace assets/profile-*.jpg -->
+          <img class="hero-avatar" src="assets/profile-480.jpg"
+               srcset="assets/profile-320.jpg 320w, assets/profile-480.jpg 480w, assets/profile-720.jpg 720w, assets/profile-1080.jpg 1080w"
+               sizes="(max-width:600px) 320px, 420px"
+               alt="Portrait — Adarsh Jaiswal" loading="lazy" width="420" height="420">
+          <figcaption class="avatar-badge">Class 9 • Web Dev</figcaption>
+          <!-- optional Lottie micro-animation layer (place JSON at assets/hero-lottie.json) -->
+          <div id="heroLottie" class="hero-lottie" aria-hidden="true"></div>
+        </figure>
+
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="title-main">Adarsh <span class="title-highlight">Jaiswal</span></span>
+            <span class="title-dot" aria-hidden="true">•</span>
+          </h1>
+
+          <p class="hero-sub">I build animated, accessible & performant websites inspired by anime aesthetics.</p>
+
+          <div class="hero-meta">
+            <span class="typed-wrap" aria-hidden="true">— <span id="typed-text" class="typed-text"></span><span class="caret">|</span></span>
+
+            <div class="hero-ctas">
+              <a class="btn primary" href="#projects">See Projects</a>
+              <a class="btn ghost" href="#contact">Let's Talk</a>
+            </div>
+
+            <ul class="social-list small">
+              <li><a href="https://www.instagram.com/x__adyo/" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a href="mailto:adarshx......@hotmail.com">Email</a></li>
+              <li><a href="https://github.com/ADARSHYO-dev" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- animated neon SVG underline -->
+      <svg class="title-underline" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+        <path id="underlinePath" d="M10 30 Q200 10 590 30" stroke="url(#g1)" stroke-width="4" fill="none" stroke-linecap="round" />
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#00ffcc"/>
+            <stop offset="1" stop-color="#00b3ff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section container reveal" aria-label="About section">
+      <div class="about-grid">
+        <div class="about-card card">
+          <h2>About</h2>
+          <p>I'm Adarsh, a Class 9 student and passionate web developer. I focus on building modern interfaces with strong visuals, delightful micro-interactions and clean, semantic code. I practice by building personal projects that push animation and accessibility boundaries.</p>
+
+          <ul class="feature-list">
+            <li>Semantic HTML & accessible web practices (a11y)</li>
+            <li>Modern CSS: Grid, Flexbox, custom properties & motion</li>
+            <li>Vanilla JS & small libraries for performance</li>
+          </ul>
+
+          <div class="badges">
+            <span class="badge">HTML</span>
+            <span class="badge">CSS</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">Python</span>
+          </div>
+        </div>
+
+        <aside class="card small-card info-card" aria-label="Quick info">
+          <h3>Quick Info</h3>
+          <table class="info-table" role="table">
+            <tr><th>Location</th><td>India</td></tr>
+            <tr><th>Education</th><td>Class 9</td></tr>
+            <tr><th>Available</th><td>Yes — small projects & collabs</td></tr>
+          </table>
+          <div style="margin-top:14px">
+            <a class="btn outline" href="assets/Adarsh_Jaiswal_Resume.pdf" download>Download Resume</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section container reveal" aria-label="Skills section">
+      <h2>Skills</h2>
+      <p class="sub">Animated radial meters show skill level (demo values).</p>
+
+      <div class="skills-row">
+        <!-- Circular skill: uses SVG stroke animated via JS -->
+        <div class="skill-circle" data-value="92" aria-label="HTML and CSS skill 92 percent">
+          <svg viewBox="0 0 120 120" class="skill-svg" role="img" aria-hidden="true">
+            <circle class="bg" cx="60" cy="60" r="50" stroke-width="10" fill="none" />
+            <circle class="progress" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round" />
+            <text x="60" y="68" class="skill-text" text-anchor="middle">0%</text>
+          </svg>
+          <div class="skill-label">HTML & CSS</div>
+        </div>
+
+        <div class="skill-circle" data-value="82" aria-label="JavaScript skill 82 percent">
+          <svg viewBox="0 0 120 120" class="skill-svg" role="img" aria-hidden="true">
+            <circle class="bg" cx="60" cy="60" r="50" stroke-width="10" fill="none" />
+            <circle class="progress" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round" />
+            <text x="60" y="68" class="skill-text" text-anchor="middle">0%</text>
+          </svg>
+          <div class="skill-label">JavaScript</div>
+        </div>
+
+        <div class="skill-circle" data-value="86" aria-label="CSS animations skill 86 percent">
+          <svg viewBox="0 0 120 120" class="skill-svg" role="img" aria-hidden="true">
+            <circle class="bg" cx="60" cy="60" r="50" stroke-width="10" fill="none" />
+            <circle class="progress" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round" />
+            <text x="60" y="68" class="skill-text" text-anchor="middle">0%</text>
+          </svg>
+          <div class="skill-label">CSS Animations</div>
+        </div>
+
+        <div class="skill-circle" data-value="70" aria-label="Python skill 70 percent">
+          <svg viewBox="0 0 120 120" class="skill-svg" role="img" aria-hidden="true">
+            <circle class="bg" cx="60" cy="60" r="50" stroke-width="10" fill="none" />
+            <circle class="progress" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round" />
+            <text x="60" y="68" class="skill-text" text-anchor="middle">0%</text>
+          </svg>
+          <div class="skill-label">Python</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section container reveal" aria-label="Projects section">
+      <div class="projects-header">
+        <h2>Projects</h2>
+        <p class="sub">Filterable, animated cards with 3D pointer-tilt. Tap cards on mobile to preview.</p>
+      </div>
+
+      <div class="controls">
+        <div class="filter-row" role="tablist" aria-label="Project filters">
+          <button class="filter active" data-filter="all" role="tab">All</button>
+          <button class="filter" data-filter="landing" role="tab">Landing</button>
+          <button class="filter" data-filter="ui" role="tab">UI</button>
+          <button class="filter" data-filter="experiment" role="tab">Experiment</button>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid" aria-live="polite">
+        <!-- Project 1 -->
+        <article class="project-card" data-tags="landing,experiment" tabindex="0" aria-label="Project Anime Landing Page">
+          <div class="thumb-wrap">
+            <img class="project-thumb lazy" data-src="assets/project-01-540.jpg"
+                 alt="Anime Landing Page preview" loading="lazy"
+                 src="assets/project-01-540.jpg">
+          </div>
+          <div class="project-body">
+            <h3>Anime Landing Page</h3>
+            <p class="small">Neon hero, particle background, animated CTA and accessible markup.</p>
+            <div class="project-actions">
+              <button class="btn small" data-open="modal" data-src="assets/project-01-large.jpg" data-title="Anime Landing Page">Preview</button>
+              <a class="btn small outline" href="#" aria-label="View source on GitHub">Source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card" data-tags="ui" tabindex="0" aria-label="Project Portfolio V2">
+          <div class="thumb-wrap">
+            <img class="project-thumb lazy" data-src="assets/project-02-540.jpg" alt="Portfolio V2 preview" loading="lazy" src="assets/project-02-540.jpg">
+          </div>
+          <div class="project-body">
+            <h3>Portfolio V2</h3>
+            <p class="small">Accessible portfolio template with theme toggle and micro-interactions.</p>
+            <div class="project-actions">
+              <button class="btn small" data-open="modal" data-src="assets/project-02-large.jpg" data-title="Portfolio V2">Preview</button>
+              <a class="btn small outline" href="#" aria-label="View source on GitHub">Source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- TODO: Add more cards (project-03, project-04...) -->
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container reveal" aria-label="Contact section">
+      <h2>Contact</h2>
+      <p class="sub">Interested in collaborating? Use the form or email me directly.</p>
+
+      <div class="contact-grid">
+        <form id="contactForm" class="contact-form card" action="https://formspree.io/f/your-form-id" method="POST" novalidate>
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input id="name" name="name" type="text" required placeholder="Your full name" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Email</span>
+            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Message</span>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+          </label>
+
+          <div class="form-row">
+            <button class="btn primary" type="submit">Send Message</button>
+            <button class="btn" type="reset">Reset</button>
+          </div>
+
+          <p class="small muted">Tip: Replace formspree endpoint with your own backend for full control.</p>
+        </form>
+
+        <aside class="card contact-card" aria-label="Contact info">
+          <h3>Get in touch</h3>
+          <p>Email: <a href="mailto:adarshx......@hotmail.com">adarshx......@hotmail.com</a></p>
+          <p>Instagram: <a href="https://www.instagram.com/x__adyo/" target="_blank" rel="noopener">@x__adyo</a></p>
+          <p>Resume: <a href="assets/Adarsh_Jaiswal_Resume.pdf" download>Download PDF</a></p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+    <div class="lightbox-inner" role="document">
+      <button class="lightbox-close" aria-label="Close preview">✕</button>
+      <img id="lightboxImage" src="" alt="">
+      <h4 id="lightboxTitle"></h4>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Adarsh Jaiswal • Built with ❤️ • <a href="#home">Back to top</a></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/script.js" defer></script>
+</body>
+</html>
